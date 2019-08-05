@@ -7,7 +7,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 	try
 	{
-		$base = new PDO('mysql:host=localhost;dbname=tontine', 'root' , '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$base = new PDO('mysql:host=localhost;dbname=tontine', 'tontine' , 'tOntine@123',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	}
 	catch(Exception $e)
 	{
