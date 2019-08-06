@@ -8,7 +8,7 @@
 		if ($res = $req->fetchAll()) {
 			return $res;
 		} else {
-			
+
 			$req = $base->query("SELECT * FROM main_collecteur c INNER JOIN main_commune co ON c.idCommune = co.idCommune WHERE c.idCommune = '$idCcommuneClient'");
 			if ($res = $req->fetchAll()) {
 				return $res;
