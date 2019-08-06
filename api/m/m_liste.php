@@ -4,7 +4,7 @@
 	function demande_collecteur($idClient, $idCollecteur, $dateReception)
 	{
 		global $base;
-		$req = $base->query("SELECT * FROM collecteur_recevoirdemande_client  WHERE idCollecteur = '$idCollecteur' AND idClient = '$idClient'");
+		$req = $base->query("SELECT * FROM collecteur_recevoirdemande_client  WHERE idCollecteur = '$idCollecteur' AND idClient = '$idClient' AND statut='wait'");
 		if ($res = $req->fetch()) {
 			return 1;
 		} else { 
