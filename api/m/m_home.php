@@ -10,7 +10,7 @@
 		} else {
 			return 1;
 		}
-		$req = $base->query("SELECT *, cf.idCollecteur as idCol, cr.idCollecteur as idColCr FROM `collecteur_recuperer_client` cr INNER JOIN main_collecteur c ON c.idCollecteur=cr.idCollecteur LEFT JOIN client_faireversement_collecteur cf ON c.idCollecteur=cf.idCollecteur WHERE cr.statutCLient='pasOk' AND cr.idClient='$idClient' ORDER BY cf.dateProchainVersement DESC");
+		$req = $base->query("SELECT *, cf.idCollecteur as idCol, cr.idCollecteur as idColCr, cr.idClient as ClientID FROM `collecteur_recuperer_client` cr INNER JOIN main_collecteur c ON c.idCollecteur=cr.idCollecteur LEFT JOIN client_faireversement_collecteur cf ON c.idCollecteur=cf.idCollecteur WHERE cr.statutCLient='pasOk' AND cr.idClient='$idClient' ORDER BY cf.dateProchainVersement DESC");
 		if ($res = $req->fetchAll()) {
 			$out[1] = $res;
 		} else { 
@@ -28,11 +28,19 @@
 		} else {
 			return 1;
 		}
-		$req = $base->query("SELECT *, cf.idClient as idCl, cr.idClient as idClCr FROM `collecteur_recuperer_client` cr INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON c.idClient=cf.idClient WHERE cr.statutCLient='pasOk' AND cr.idCollecteur='$idCollecteur' ORDER BY cf.dateProchainVersement DESC");
+		$req = $base->query("SELECT *, cf.idClient as idCl, cr.idClient as idClCr, cr.idCollecteur as colID FROM `collecteur_recuperer_client` cr INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON c.idClient=cf.idClient WHERE cr.statutCLient='pasOk' AND cr.idCollecteur='$idCollecteur' ORDER BY cf.dateProchainVersement DESC");
 		if ($res = $req->fetchAll()) {
 			$out[1] = $res;
 		} else { 
 			
 		}
 		return $out;
+	}
+
+	function confirmer_versement($idCollecteur, $idClient, $montantVerse, $dateVersement, $dateProchainVersement, $type)
+	{
+		global $base;
+		$sql = "INSERT INTO `client_faireversement_collecteur` (`id`, `idClient`, `idCollecteur`, `dateVersement`, `dateProchainVersement`, `montantVerse`, `type`) VALUES (NULL, '$idClient', '$idCollecteur', '$dateVersement', '$dateProchainVersement', '$montantVerse', '$type')";
+
+		$base->exec($sql);
 	}

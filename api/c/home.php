@@ -23,4 +23,18 @@
 		} else {
 			retour_json(true, "", $res);
 		}
+	} elseif (isset($_POST['confirmerPayement'])) {
+		extract($_POST);
+		$idCollecteur = (int)$idCollecteur;
+		$idClient = (int)$idClient;
+		$montantVerse = (int)$montantVerse;
+		$dateProchainVersement = check_data($dateProchainVersement);
+		$dateVersement = date('Y-m-d');
+		$type = 'Versement';
+		if ($montantVerse == 0 || $idCollecteur == 0 || $idClient == 0) {
+			retour_json(false, "Vérifiez bien les données saisies!");
+		} else {
+			confirmer_versement($idCollecteur, $idClient, $montantVerse, $dateVersement, $dateProchainVersement, $type);
+			retour_json(true, "Client mis à jour avec succès");
+		}
 	}
