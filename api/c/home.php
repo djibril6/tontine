@@ -37,4 +37,16 @@
 			confirmer_versement($idCollecteur, $idClient, $montantVerse, $dateVersement, $dateProchainVersement, $type);
 			retour_json(true, "Client mis à jour avec succès");
 		}
+	} elseif (isset($_POST['coFermerTontine'])) {
+		extract($_POST);
+		$idCollecteur = (int)$idCollecteur;
+		$idClient = (int)$idClient;
+		demande_terminer_collecte($idCollecteur, $idClient);
+		retour_json(true, "Votre demande est envoyée, patientez le temps que le client confirme");
+	} elseif (isset($_POST['clFermerTontine'])) {
+		extract($_POST);
+		$idCollecteur = (int)$idCollecteur;
+		$idClient = (int)$idClient;
+		valider_terminer_collecte($idCollecteur, $idClient);
+		retour_json(true, "Vous venez de confirmer la réception de votre somme collectée");
 	}

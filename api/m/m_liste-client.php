@@ -4,7 +4,7 @@
 	function liste_clients($idCollecteur)
 	{
 		global $base;
-		$req = $base->query("SELECT *, cr.idClient as idClCr FROM `collecteur_recuperer_client` cr INNER JOIN main_client c ON c.idClient=cr.idClient WHERE cr.statutCLient='pasOk' AND cr.idCollecteur='$idCollecteur' ORDER BY cr.dateRecuperation DESC");
+		$req = $base->query("SELECT *, cr.idClient as idClCr FROM `collecteur_recuperer_client` cr INNER JOIN main_client c ON c.idClient=cr.idClient WHERE (cr.statutCLient='pasOk' OR cr.statutCLient = 'pas') AND cr.idCollecteur='$idCollecteur' ORDER BY cr.dateRecuperation DESC");
 		if ($res = $req->fetchAll()) {
 			return $res;
 		} else {
