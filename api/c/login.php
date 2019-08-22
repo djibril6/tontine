@@ -4,7 +4,6 @@
 	if (isset($_POST['login'])) {
 		extract($_POST);
 		$tel1 = check_data($tel1);
-		$tel1 = "+229".$tel1;
 		$motDePasse = sha1(check_data($motDePasse));
 		$profil = check_data($profil); 
 	
