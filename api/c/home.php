@@ -49,4 +49,15 @@
 		$idClient = (int)$idClient;
 		valider_terminer_collecte($idCollecteur, $idClient);
 		retour_json(true, "Vous venez de confirmer la réception de votre somme collectée");
+
+	} elseif (isset($_POST['QRClient'])) {
+		extract($_POST);
+		$idCollecteur = (int)$idCollecteur;
+		$telClient = (int)$telClient;
+		$res = collecteur_voir_client($idCollecteur, $telClient);
+		if ($res == 1) {
+			retour_json(false, "Aucune donnée");
+		} else {
+			retour_json(true, "", $res);
+		}
 	}
