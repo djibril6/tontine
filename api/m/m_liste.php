@@ -30,10 +30,20 @@
 		$base->exec("UPDATE collecteur_recevoirdemande_client SET statut='no' WHERE idClient='$idClient' AND idCollecteur='$idCollecteur'");
 	}
 
-	function recuperer_client($idClient, $idCollecteur, $dateRecuperation,$dateDebutCollecte, $montantAverser, $frequence, $typeFrequence)
+	function recuperer_client($idClient, $idCollecteur, $dateRecuperation,$dateDebutCollecte, $montantAverser, $frequence, $typeFrequence, $telClient="")
 	{
 		global $base;
+		if ($telClient != "") {
+			$req = $base->query("SELECT idClient FROM main_client WHERE tel1Client='$telClient'");
+			if ($res = $req->fetch()) {
+				$idClient = (int)$res['idClient'];
+			} else {
+				return 1;
+			}
+		}
 		$base->exec("UPDATE `collecteur_recevoirdemande_client` SET `statut` = 'yes' WHERE `idCollecteur` = '$idCollecteur' AND `idClient` = '$idClient'");
 		$base->exec("INSERT INTO `collecteur_recuperer_client` (`idCollecteur`, `idClient`, `dateRecuperation`, `dateDebutCollecte`, `montantAverser`, `frequence`, `statutClient`, `typeFrequence`) VALUES ('$idCollecteur', '$idClient', '$dateRecuperation', '$dateDebutCollecte', '$montantAverser', '$frequence', 'pasOk', '$typeFrequence')");
+
+		return 0;
 		
 	}
