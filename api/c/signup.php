@@ -12,9 +12,9 @@
 		$profil = check_data($profil); 
 	
 		if ($profil == 'collecteur') {
-			$res = signup_collecteur($nom, $prenom, $tel1, $motDePasse);
+			$res = signup_collecteur($nom, $prenom, $tel1, $motDePasse, $codePays);
 		} else {
-			$res = signup_client($nom, $prenom, $tel1, $motDePasse);
+			$res = signup_client($nom, $prenom, $tel1, $motDePasse, $codePays);
 		}
 		if ($res == 1) {
 			retour_json(false, "Le numéro de téléphone que vous avez saisi existe déjà");
