@@ -31,6 +31,9 @@
 		$dateProchainVersement = check_data($dateProchainVersement);
 		$dateVersement = date('Y-m-d');
 		$type = 'Versement';
+		if (isset($_POST['type'])) {
+			$type = 'Retrait';
+		}
 		if ($montantVerse == 0 || $idCollecteur == 0 || $idClient == 0) {
 			retour_json(false, "Vérifiez bien les données saisies!");
 		} else {
