@@ -28,7 +28,7 @@
 		} else {
 			return 1;
 		}
-		$req = $base->query("SELECT DISTINCT cf.id, co.idCollecteur, c.idClient, c.nomClient, c.prenomClient, c.tel1Client, c.emailClient, cr.dateRecuperation, cr.dateDebutCollecte, cr.montantAverser, cr.frequence, cr.statutClient, cr.typeFrequence, cf.dateVersement, cf.dateProchainVersement, cf.montantVerse, cf.commentaire, cf.type, cf.statut FROM main_collecteur co INNER JOIN `collecteur_recuperer_client` cr ON cr.idCollecteur=co.idCollecteur INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON co.idCollecteur=cf.idCollecteur AND c.idClient=cf.idClient WHERE (cr.statutCLient='pasOk' OR cr.statutCLient='pas') AND co.idCollecteur='$idCollecteur' ORDER BY cr.id DESC, cf.dateVersement DESC, cf.dateProchainVersement DESC");
+		$req = $base->query("SELECT DISTINCT cf.id, co.idCollecteur, c.idClient, c.nomClient, c.prenomClient, c.tel1Client, c.emailClient, c.statut as statClient, cr.dateRecuperation, cr.dateDebutCollecte, cr.montantAverser, cr.frequence, cr.statutClient, cr.typeFrequence, cf.dateVersement, cf.dateProchainVersement, cf.montantVerse, cf.commentaire, cf.type, cf.statut FROM main_collecteur co INNER JOIN `collecteur_recuperer_client` cr ON cr.idCollecteur=co.idCollecteur INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON co.idCollecteur=cf.idCollecteur AND c.idClient=cf.idClient WHERE (cr.statutCLient='pasOk' OR cr.statutCLient='pas') AND co.idCollecteur='$idCollecteur' ORDER BY cr.id DESC, cf.dateVersement DESC, cf.dateProchainVersement DESC");
 		if ($res = $req->fetchAll()) {
 			$out[1] = $res;
 		} else { 
@@ -40,7 +40,7 @@
 	function collecteur_voir_client($idCollecteur, $telClient)
 	{
 		global $base;
-		$req = $base->query("SELECT DISTINCT cf.id, co.idCollecteur, c.idClient, c.nomClient, c.prenomClient, c.tel1Client, c.emailClient, cr.dateRecuperation, cr.dateDebutCollecte, cr.montantAverser, cr.frequence, cr.statutClient, cr.typeFrequence, cf.dateVersement, cf.dateProchainVersement, cf.montantVerse, cf.commentaire, cf.type, cf.statut FROM main_collecteur co INNER JOIN `collecteur_recuperer_client` cr ON cr.idCollecteur=co.idCollecteur INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON c.idClient=cf.idClient WHERE (cr.statutCLient='pasOk' OR cr.statutCLient='pas') AND cr.idCollecteur='$idCollecteur' AND c.tel1Client='$telClient' ORDER BY cr.id DESC, cf.dateVersement DESC, cf.dateProchainVersement DESC");
+		$req = $base->query("SELECT DISTINCT cf.id, co.idCollecteur, c.idClient, c.nomClient, c.prenomClient, c.tel1Client, c.emailClient, c.statut as statClient, cr.dateRecuperation, cr.dateDebutCollecte, cr.montantAverser, cr.frequence, cr.statutClient, cr.typeFrequence, cf.dateVersement, cf.dateProchainVersement, cf.montantVerse, cf.commentaire, cf.type, cf.statut FROM main_collecteur co INNER JOIN `collecteur_recuperer_client` cr ON cr.idCollecteur=co.idCollecteur INNER JOIN main_client c ON c.idClient=cr.idClient LEFT JOIN client_faireversement_collecteur cf ON c.idClient=cf.idClient WHERE (cr.statutCLient='pasOk' OR cr.statutCLient='pas') AND cr.idCollecteur='$idCollecteur' AND c.tel1Client='$telClient' ORDER BY cr.id DESC, cf.dateVersement DESC, cf.dateProchainVersement DESC");
 		if ($res = $req->fetchAll()) {
 			return $res;
 		} else { 

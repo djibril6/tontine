@@ -51,7 +51,7 @@
 		$idCollecteur = (int)$idCollecteur;
 		$idClient = (int)$idClient;
 		valider_terminer_collecte($idCollecteur, $idClient);
-		retour_json(true, "Vous venez de confirmer la réception de votre somme collectée");
+		retour_json(true, "Action réussie!");
 
 	} elseif (isset($_POST['QRClient'])) {
 		extract($_POST);

@@ -4,7 +4,7 @@
 	function login_client($tel1Client, $motDePasseClient)
 	{
 		global $base;
-		$req = $base->query("SELECT * FROM main_client WHERE tel1Client = '$tel1Client' AND motDePasseClient = '$motDePasseClient'");
+		$req = $base->query("SELECT * FROM main_client WHERE tel1Client = '$tel1Client' AND motDePasseClient = '$motDePasseClient' AND statut != 'created'");
 
 		if ($res = $req->fetch()) {
 			$idUser = $res['idClient'];
