@@ -66,6 +66,6 @@
 	} elseif (isset($_POST['syncData'])) {
 		extract($_POST);
 		$req = check_data($req);
-		// execute_req($req);
+		execute_req($req);
 		retour_json(true, "");
 	}
