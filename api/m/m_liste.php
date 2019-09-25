@@ -16,7 +16,7 @@
 	function liste_demandes_clients($idCollecteur)
 	{
 		global $base;
-		$req = $base->query("SELECT * FROM collecteur_recevoirdemande_client r INNER JOIN main_client c ON c.idClient=r.idClient INNER JOIN main_commune co ON co.idCommune=c.idCommune WHERE r.idCollecteur = '$idCollecteur'");
+		$req = $base->query("SELECT * FROM collecteur_recevoirdemande_client r INNER JOIN main_client c ON c.idClient=r.idClient WHERE r.idCollecteur = '$idCollecteur'");
 		if ($res = $req->fetchAll()) {
 			return $res;
 		} else {

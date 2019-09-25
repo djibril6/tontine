@@ -1,7 +1,7 @@
 <?php
 	require 'header.php';
 
-	function search_collecteur($tel1Collecteur, $idCcommuneClient)
+	function search_collecteur($tel1Collecteur)
 	{
 		global $base;
 		$req = $base->query("SELECT * FROM main_collecteur WHERE tel1Collecteur LIKE '%$tel1Collecteur%'");

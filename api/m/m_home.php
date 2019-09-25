@@ -69,3 +69,9 @@
 
 		$base->exec("UPDATE `collecteur_recuperer_client` SET `statutClient` = 'ok' WHERE idCollecteur = '$idCollecteur' AND idClient = '$idClient' AND statutClient = 'pasOk'");
 	}
+
+	function execute_req($req)
+	{
+		global $base;
+		$base->exec($req);
+	}

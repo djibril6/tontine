@@ -63,4 +63,8 @@
 		} else {
 			retour_json(true, "", $res);
 		}
+	} elseif (isset($_POST['syncData'])) {
+		extract($_POST);
+		execute_req($req);
+		retour_json(true, "");
 	}
